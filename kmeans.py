@@ -60,3 +60,15 @@ def k_means_clustering(k, data):
         # centroids of newly formed clusters do not change    
         if stable(last_centroids, centroids):
             return cluster
+
+
+def inertia(clusters):
+    sum = 0
+    point_num = 0
+    for key in clusters.keys():
+        cluster = clusters[key]
+        center = cluster['center']
+        for point in cluster['point']:
+            point_num += 1
+            sum += ((point[0] - center[0])**2 + (point[1] - center[1])**2)
+    return sum / point_num
