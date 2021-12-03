@@ -1,5 +1,3 @@
-# https://www.analyticsvidhya.com/blog/2019/08/comprehensive-guide-k-means-clustering/
-
 # Step 1: Choose the number of clusters k
 # Step 2: Select k random points from the data as centroids
 # Step 3: Assign all the points to the closest cluster centroid
@@ -10,6 +8,7 @@
 # Centroids of newly formed clusters do not change
 # Points remain in the same cluster
 # Maximum number of iterations are reached
+# Reference: https://www.analyticsvidhya.com/blog/2019/08/comprehensive-guide-k-means-clustering/
 
 
 from scipy.io import loadmat
@@ -35,20 +34,14 @@ def k_means_clustering(k, data):
                 return False
         return True
     
-    # initialize
     cluster = {}
     # Step 2: Select k random points from the data as centroids
     centroids = random.sample(list(data), k) # [array([1.94994131, 0.31367821]), array([0.02987393, 1.03225495]), array([ 0.9149981 , -0.55322564])]
     for i in range(k):
         cluster[i] = {'center': centroids[i], 'point': []}
     last_centroids = None
-    cnt = 0
 
-    # Step 5: Repeat steps 3 and 4 until
-    # Centroids of newly formed clusters do not change
     while True:
-        print(cnt)
-        cnt += 1
         for i in range(k):
             cluster[i] = {'center': centroids[i], 'point': []}
         last_centroids = deepcopy(centroids)
@@ -67,8 +60,9 @@ def k_means_clustering(k, data):
         for i in range(k):
             centroids[i] = np.mean(cluster[i]['point'], axis=0)
         
+        # Step 5: Repeat steps 3 and 4 until
+        # centroids of newly formed clusters do not change    
         if stable(last_centroids, centroids):
-            print('true')
             return cluster
             
 
@@ -97,4 +91,3 @@ if __name__ == '__main__':
     for i in range(k):
         plt.scatter(np.array(cluster[i]['point']).T[0],np.array(cluster[i]['point']).T[1])
     plt.show()
-
