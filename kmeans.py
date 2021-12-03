@@ -10,14 +10,10 @@
 # Maximum number of iterations are reached
 # Reference: https://www.analyticsvidhya.com/blog/2019/08/comprehensive-guide-k-means-clustering/
 
-
-from scipy.io import loadmat
-import argparse
 import numpy as np
 import random
 from math import *
 from copy import deepcopy
-import matplotlib.pyplot as plt
 
 
 def k_means_clustering(k, data):
@@ -64,30 +60,3 @@ def k_means_clustering(k, data):
         # centroids of newly formed clusters do not change    
         if stable(last_centroids, centroids):
             return cluster
-            
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-k', default=3, type=int)
-    opt = parser.parse_args()
-
-    k = opt.k
-    data = loadmat('data.mat')
-    data1 = data['data1']
-    data2 = data['data2']
-    data3 = data['data3']
-
-    cluster = k_means_clustering(k=k, data=data1)
-    for i in range(k):
-        plt.scatter(np.array(cluster[i]['point']).T[0],np.array(cluster[i]['point']).T[1])
-    plt.show()
-
-    cluster = k_means_clustering(k=k, data=data2)
-    for i in range(k):
-        plt.scatter(np.array(cluster[i]['point']).T[0],np.array(cluster[i]['point']).T[1])
-    plt.show()
-
-    cluster = k_means_clustering(k=k, data=data3)
-    for i in range(k):
-        plt.scatter(np.array(cluster[i]['point']).T[0],np.array(cluster[i]['point']).T[1])
-    plt.show()
