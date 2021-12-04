@@ -14,7 +14,6 @@ UNASSIGNED = 0
 core = -1
 edge = -2
 
-
 # function to find all neigbor points in radius
 def neighbor_points(data, pointId, radius):
     points = []
@@ -25,8 +24,6 @@ def neighbor_points(data, pointId, radius):
     return points
 
 # DB Scan algorithom
-
-
 def dbscan(data, Eps, MinPt):
     # initilize all pointlable to unassign
     pointlabel = [UNASSIGNED] * len(data)
@@ -39,7 +36,7 @@ def dbscan(data, Eps, MinPt):
     # Find all neigbor for all point
     cnt = 0
     for i in range(len(data)):
-        if cnt % 100 == 98:
+        if cnt % 100 == 998:
             print(cnt)
         cnt += 1
         pointcount.append(neighbor_points(data, i, Eps))
@@ -65,7 +62,7 @@ def dbscan(data, Eps, MinPt):
     cnt = 0
     # Using a Queue to put all neigbor core point in queue and find neigboir's neigbor
     for i in range(len(pointlabel)):
-        if cnt % 100 == 99:
+        if cnt % 100 == 999:
             print(cnt)
         cnt += 1
         q = queue.Queue()
@@ -91,8 +88,6 @@ def dbscan(data, Eps, MinPt):
     return pointlabel, cl
 
 # Function to plot final result
-
-
 def plotRes(data, clusterRes, clusterNum):
     nPoints = len(data)
     scatterColors = ['black', 'green', 'brown',
